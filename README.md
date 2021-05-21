@@ -15,4 +15,10 @@
 ДЗ_2_1
 -----------
 п.1 Модификация ридмихи через vim
+-----------
+ДЗ_2_2
+https://github.com/tviik/devops-netology -- origin
+https://gitlab.com/tviik/devops-netology -- gitlab
+https://bitbucket.org/tviik/devops-netology -- bitbucket
 
+------------
