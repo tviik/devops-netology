@@ -72,7 +72,8 @@ commit dd01a35078f040ca984cdd349f18d0b67e486c35
 commit 225466bc3e5f35baa5d07197bbc079345b77525e
     Cleanup after v0.12.23 release
 
-- 5. commit 8c928e83589d90a031f811fae52a81be7153e82f
+- 5. 
+commit 8c928e83589d90a031f811fae52a81be7153e82f
 тут не уверен, искал так:
 git grep -p 'func providerSource('
 provider_source.go:func providerSource(configs []*cliconfig.ProviderInstallation, services *disco.Disco) (getproviders.Source, tfdiags.Diagnostics) {
