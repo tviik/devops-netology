@@ -155,32 +155,32 @@ commit 8364383c359a6b738a436d1b7745ccdce178df47
 - 7. bash 5>&1 - инициализируем новый файловый дескриптор и перенаправляем его в stdout. теперь 5 = &1 и echo netology > /proc/$$/fd/5 юудет выводить echo в stdout  
 - 8. Очень сложно. Попробовал вывести так: bash 7>&2 | cat /tmp/dirnotexist | /proc/$$/fd/7 > /tmp/1.txt или bash 7>&2 | /tmp/1.txt <7 | cat /tmp/dirnotexist
 - 10. cat /proc/$$/environ: "Этот файл содержит окружение процесса." Как еще можно получить аналогичный по содержанию вывод? - максимум что смог сообразить, это выдом через эхо указанных в предыдущем выводе переменных, импа echo $PATH, $HOME, $PWD etc.
-## /proc/<PID>/cmdline: "Этот файл содержит полную командную строку запуска процесса, кроме тех процессов, что полностью ушли в своппинг, а также тех, что превратились в зомби. В этих двух случаях в файле ничего нет, то есть чтение этого файла вернет 0 символов. Аргументы командной строки в этом файле указаны как список строк, каждая из которых завешается нулевым символом, с добавочным нулевым байтом после последней строки."
-## /proc/<PID>/exe: "является символьной ссылкой, содержащей фактическое полное имя выполняемого файла"
+### /proc/<PID>/cmdline: "Этот файл содержит полную командную строку запуска процесса, кроме тех процессов, что полностью ушли в своппинг, а также тех, что превратились в зомби. В этих двух случаях в файле ничего нет, то есть чтение этого файла вернет 0 символов. Аргументы командной строки в этом файле указаны как список строк, каждая из которых завешается нулевым символом, с добавочным нулевым байтом после последней строки."
+### /proc/<PID>/exe: "является символьной ссылкой, содержащей фактическое полное имя выполняемого файла"
 - 11. sse4_2 
 - 12. ssh localhost 'tty' - not a tty - это удаленное исполнение "вне терминала". как изменить поведение - ввести в терминале.
 - 13. тут воодще беда:
 ----------------------------
-## kernel.yama.ptrace_scope = 0
-## root@vagrant:/home/vagrant# reptyr -h
-## bash: reptyr: command not found
-## root@vagrant:/home/vagrant# sudo apt install reptyr
-## Reading package lists... Done
-## Building dependency tree
-## Reading state information... Done
-## The following NEW packages will be installed:
-##  reptyr
-## 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
-## Need to get 22.5 kB of archives.
-## After this operation, 67.6 kB of additional disk space will be used.
-## Err:1 http://archive.ubuntu.com/ubuntu focal/universe amd64 reptyr amd64 0.6.2-1.3
-##  Temporary failure resolving 'archive.ubuntu.com'
-## E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/universe/r/reptyr/reptyr_0.6.2-1.3_amd64.deb  Temporary failure resolving 'archive.ubuntu.com'
-## E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
-## root@vagrant:/home/vagrant# reptyr -h
-## bash: reptyr: command not found
-## root@vagrant:/home/vagrant# 
+### kernel.yama.ptrace_scope = 0
+### root@vagrant:/home/vagrant# reptyr -h
+### bash: reptyr: command not found
+### root@vagrant:/home/vagrant# sudo apt install reptyr
+### Reading package lists... Done
+### Building dependency tree
+### Reading state information... Done
+### The following NEW packages will be installed:
+###  reptyr
+### 0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+### Need to get 22.5 kB of archives.
+### After this operation, 67.6 kB of additional disk space will be used.
+### Err:1 http://archive.ubuntu.com/ubuntu focal/universe amd64 reptyr amd64 0.6.2-1.3
+###  Temporary failure resolving 'archive.ubuntu.com'
+### E: Failed to fetch http://archive.ubuntu.com/ubuntu/pool/universe/r/reptyr/reptyr_0.6.2-1.3_amd64.deb  Temporary failure resolving 'archive.ubuntu.com'
+### E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+### root@vagrant:/home/vagrant# reptyr -h
+### bash: reptyr: command not found
+### root@vagrant:/home/vagrant# 
 -----------------------------
-## в идеале думал так reptyr -l PID tty2
+### в идеале думал так reptyr -l PID tty2
 - 14. "Команда tee читает из стандартного ввода и записывает как в стандартный вывод, в один или несколько файлов одновременно" ; sudo не выполняет перенаправление вывода, но  sudo tee - команда для записи в файлы, принадлежащие другим пользователям. tee получит вывод команды echo, повысит права на sudo и запишет в файл.
 
