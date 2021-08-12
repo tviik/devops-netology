@@ -220,18 +220,18 @@ a=0
 while (($a<=5))
 	do
 		for i in ${array_ip[@]}
-			do 
-			curl https://$i:$port
-				if (($? != 0))
-				then date >> file.log
-				curl https://$i:$port  >> file.log
-				sleep 3
-			else
-				date >> file.log
-				echo evrything is ok! >> file.log
-			fi
-	done
-		let "a += 1"
+		do 
+		curl https://$i:$port
+		if (($? != 0))
+			then date >> file.log
+			curl https://$i:$port  >> file.log
+			sleep 3
+		else
+			date >> file.log
+			echo evrything is ok! >> file.log
+		fi
+done
+let "a += 1"
 done
 ```
 
@@ -246,14 +246,14 @@ do
 	for i in ${array_ip[@]}
 		do 
 		curl https://$i:$port
-			if (($? != 0))
-				then date >> error.log
-				curl -I https://$i:$port  >> error.log
-				break # прерываем скрипт на первом упавшем узле
-			else
-				date >> file.log
-				echo evrything is ok! >> file.log
-			fi
+		if (($? != 0))
+			then date >> error.log
+			curl -I https://$i:$port  >> error.log
+			break # прерываем скрипт на первом упавшем узле
+		else
+			date >> file.log
+			echo evrything is ok! >> file.log
+		fi
 done
 done
 ```
