@@ -203,7 +203,7 @@ e = 3 -- вызов арифметической функции внутри с�
 while ((1==1))
 do curl https://localhost:4757
 if (($? != 0))
-then date >> curl.log
+then date > curl.log
 sleep 60
 elif
 break
