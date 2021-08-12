@@ -218,19 +218,20 @@ array_ip=(192.168.0.1 173.194.222.113 87.250.250.242) #массив переме
 port=80
 a=0
 while (($a<=5))
-do
-for i in ${array_ip[@]}
-do curl https://$i:$port
-if (($? != 0))
-then date >> file.log
-curl https://$i:$port  >> file.log
-sleep 3
-else
-date >> file.log
-echo evrything is ok! >> file.log
-fi
-done
-let "a += 1"
+	do
+		for i in ${array_ip[@]}
+			do 
+			curl https://$i:$port
+				if (($? != 0))
+				then date >> file.log
+				curl https://$i:$port  >> file.log
+				sleep 3
+			else
+				date >> file.log
+				echo evrything is ok! >> file.log
+			fi
+	done
+		let "a += 1"
 done
 ```
 
@@ -242,18 +243,33 @@ port=80
 a=0
 while ((1==1))
 do
-for i in ${array_ip[@]}
-do curl https://$i:$port
-if (($? != 0))
-then date >> error.log
-curl https://$i:$port  >> error.log
-break # прерываем скрипт на первом упавшем узле
-else
-date >> file.log
-echo evrything is ok! >> file.log
-fi
+	for i in ${array_ip[@]}
+		do 
+		curl https://$i:$port
+			if (($? != 0))
+				then date >> error.log
+				curl -I https://$i:$port  >> error.log
+				break # прерываем скрипт на первом упавшем узле
+			else
+				date >> file.log
+				echo evrything is ok! >> file.log
+			fi
 done
 done
 ```
 
-###### п.5 - буду благодарен за пример, не успеваю подумать и сделать. Хуки храняться в директории гита со скриптами, правда на питоне если не ошибаюст=ь, но вероятно можно и sh положить или создать демона в системд который отслеживает события комита. При реализации я бы думал как сделать get события пуша, брать из нее (или вырезать) параметр с комментарием и сравнивать его по длине. при отрицателльном результате алертить админу и блокировать пуш.    
+###### п.5  
+```
+#!/bin/bash
+maxlength=30
+mylenngth=$(cat $1|wc -m)
+if [[ $mylenngth -gt $maxlength ]]
+  then
+  echo "your commit longer then 30"
+  exit 1
+elif ! grep -qE '^([0-9][0-9]-script-[0-9][0-9]-[a-z])' $1;
+  then
+  echo "your commit should be like [XX-script-XX-XX]"
+  exit 1
+fi  
+```  
